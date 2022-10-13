@@ -1,0 +1,22 @@
+﻿@model Story
+@{
+    ViewData["Title"] = "Stories";
+}
+
+<div class="text-center">
+    <h1>Stories of Star Wars</h1>
+    @if(@Model.StoryText != null)
+    {
+        <p>
+            <h2>The Last Story Posted</h2>
+            Story Title: @Model.StoryTitle<br />
+            Story Topic: @Model.StoryTopic<br />
+            Story Date: @Model.StoryDate<br />
+            Story: @Model.StoryText<br />
+            Story Author: @Model.User.UserName<br />
+            Submission Date: @Model.SubmitDate.ToShortDateString()
+        </p>
+   }
+    <a href="/Stories/Story">Add a Story</a><br />
+    <a href="/Home">Home</a>
+</div>

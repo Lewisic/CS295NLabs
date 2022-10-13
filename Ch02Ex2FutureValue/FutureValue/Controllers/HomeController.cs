@@ -1,4 +1,4 @@
-﻿using IsaacLewisSite.Models;
+﻿using FutureValue.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IsaacLewisSite.Controllers
+namespace FutureValue.Controllers
 {
     public class HomeController : Controller
     {
@@ -18,17 +18,14 @@ namespace IsaacLewisSite.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        /*public IActionResult Index()
         {
+            ViewBag.Name = "Mary";
+            ViewBag.FV = 99999.99;
             return View();
-        }
+        }*/
 
         public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult History()
         {
             return View();
         }
@@ -38,5 +35,32 @@ namespace IsaacLewisSite.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            ViewBag.FV = 0; return View();
+        }
+
+        /*[HttpPost]
+        public IActionResult Index(FutureValueModel model)
+        {
+            ViewBag.FV = model.CalculateFutureValue(); return View(model);
+        }*/
+
+        [HttpPost]
+        public IActionResult Index(FutureValueModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewBag.FV = model.CalculateFutureValue();
+            }
+            else
+            {
+                ViewBag.FV = 0;
+            }
+            return View(model);
+        }
+
     }
 }

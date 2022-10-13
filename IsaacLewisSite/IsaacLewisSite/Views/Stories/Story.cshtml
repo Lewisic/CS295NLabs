@@ -1,0 +1,21 @@
+﻿@model Story
+
+<h1 class="display-4">Add a Story</h1>
+<form method="post">
+    <label asp-for="StoryTitle">Title</label>
+    <input asp-for="StoryTitle" /><br />
+
+    <label asp-for="StoryTopic">Topic</label>
+    <input asp-for="StoryTopic" /><br />
+
+    <label asp-for="StoryDate">Year the story took place</label>
+    <input asp-for="StoryDate" /><br />
+
+    <label asp-for="User.UserName">Story Author</label>
+    <input asp-for="User.UserName" /><br />
+
+    <label asp-for="StoryText">Story</label>
+    <textarea asp-for="StoryText"></textarea><br />
+
+    <button type="submit">Submit</button>
+</form>
