@@ -1,21 +1,20 @@
 ﻿@model Story
 
-<h1 class="display-4">Add a Story</h1>
-<form method="post">
-    <label asp-for="StoryTitle">Title</label>
-    <input asp-for="StoryTitle" /><br />
+<h1 class="display-4 d-flex justify-content-center">Add a Story</h1>
+<div class="container d-flex justify-content-center">
+    <form method="post">
+        
+        
+        <input asp-for="StoryTitle" placeholder="Title" class="py-1" style="width: 200px"/><br />
 
-    <label asp-for="StoryTopic">Topic</label>
-    <input asp-for="StoryTopic" /><br />
+        <input asp-for="StoryTopic" placeholder="Topic" class="py-1" style="width: 200px" /><br />
 
-    <label asp-for="StoryDate">Year the story took place</label>
-    <input asp-for="StoryDate" /><br />
+        <input asp-for="StoryDate" placeholder="Year the story took place" class="py-1" style="width: 200px" /><br />
 
-    <label asp-for="User.UserName">Story Author</label>
-    <input asp-for="User.UserName" /><br />
+        <input asp-for="User.UserName" placeholder="Story Author" class="py-1" style="width: 200px" /><br />
 
-    <label asp-for="StoryText">Story</label>
-    <textarea asp-for="StoryText"></textarea><br />
+        <textarea asp-for="StoryText" placeholder="Story" style="width: 200px"></textarea><br />
 
-    <button type="submit">Submit</button>
-</form>
+        <button type="submit" class="btn-primary">Submit</button>
+    </form>
+</div>

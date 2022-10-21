@@ -4,19 +4,61 @@
 }
 
 <div class="text-center">
-    <h1>Stories of Star Wars</h1>
-    @if(@Model.StoryText != null)
+    <h1 class="jumbotron">Stories of Star Wars</h1>
+    @if (@Model.StoryText != null)
     {
-        <p>
-            <h2>The Last Story Posted</h2>
-            Story Title: @Model.StoryTitle<br />
-            Story Topic: @Model.StoryTopic<br />
-            Story Date: @Model.StoryDate<br />
-            Story: @Model.StoryText<br />
-            Story Author: @Model.User.UserName<br />
-            Submission Date: @Model.SubmitDate.ToShortDateString()
-        </p>
-   }
+        <h2>The Last Story Posted</h2>
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-2 border border-dark">
+                    Story Title:
+                </div>
+                <div class="col-3 border border-dark">
+                    @Model.StoryTitle
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-2 border border-dark">
+                    Story Topic:
+                </div>
+                <div class="col-3 border border-dark">
+                    @Model.StoryTopic
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-2 border border-dark">
+                    Story Date:
+                </div>
+                <div class="col-3 border border-dark">
+                    @Model.StoryDate
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-2 border border-dark">
+                    Story:
+                </div>
+                <div class="col-3 border border-dark">
+                    @Model.StoryText
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-2 border border-dark">
+                    Story Author:
+                </div>
+                <div class="col-3 border border-dark">
+                    @Model.User.UserName
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-2 border border-dark">
+                    Submission Date:
+                </div>
+                <div class="col-3 border border-dark">
+                    @Model.SubmitDate.ToShortDateString()
+                </div>
+            </div>
+        </div>
+    }
     <a href="/Stories/Story">Add a Story</a><br />
     <a href="/Home">Home</a>
 </div>
