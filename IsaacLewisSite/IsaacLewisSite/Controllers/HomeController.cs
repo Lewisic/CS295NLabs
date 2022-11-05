@@ -1,4 +1,5 @@
 ﻿using IsaacLewisSite.Models;
+using IsaacLewisSite;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -37,6 +38,18 @@ namespace IsaacLewisSite.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        [HttpGet]
+        public IActionResult Quiz()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Quiz(QuizVM model)
+        {
+            model.CheckAnswers();
+            return View(model);
         }
     }
 }
