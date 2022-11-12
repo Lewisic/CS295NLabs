@@ -4,6 +4,7 @@ namespace IsaacLewisSite.Models
 {
     public class Story
     {
+        public int StoryID { get; set; }
         public string StoryTitle { get; set; }
         public string StoryTopic { get; set; }
         public int StoryDate { get; set; }

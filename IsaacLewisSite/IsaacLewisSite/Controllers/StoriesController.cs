@@ -1,22 +1,25 @@
 ﻿using IsaacLewisSite.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 
 namespace IsaacLewisSite.Controllers
 {
     public class StoriesController : Controller
     {
-        public IActionResult Index(string storyTitle, string storyTopic, int storyDate, string storyAuthor, string storyText, DateTime date)
+        ApplicationDbContext context;
+        public StoriesController(ApplicationDbContext c)
         {
-            Story story = new Story();
-            story.StoryTitle = storyTitle;
-            story.StoryTopic = storyTopic;
-            story.StoryDate = storyDate;
-            AppUser user = new AppUser();
-            user.UserName = storyAuthor;
-            story.StoryText = storyText;
-            story.SubmitDate = date;
-            story.User = user;
+            context = c;
+        }
+
+        public IActionResult Index(int storyId)
+        {
+            var story = context.Stories
+                .Include(story => story.User)
+                .Where(story => story.StoryID == storyId)
+                .SingleOrDefault();
             return View(story);
         }
 
@@ -28,17 +31,10 @@ namespace IsaacLewisSite.Controllers
         [HttpPost]
         public IActionResult Story(Story model)
         {
-            return RedirectToAction("Index",
-                    new
-                    {
-                        storyTitle = model.StoryTitle,
-                        storyTopic = model.StoryTopic,
-                        storyDate = model.StoryDate,
-                        storyAuthor = model.User.UserName,
-                        storyText = model.StoryText,
-                        date = DateTime.Now
-                    }
-                );
+            model.SubmitDate = DateTime.Now;
+            context.Stories.Add(model);
+            context.SaveChanges();
+            return RedirectToAction("Index", new { storyId = model.StoryID });
         }
 
     }
