@@ -1,26 +1,42 @@
 ﻿using IsaacLewisSite.Models;
+using IsaacLewisSite.Repos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace IsaacLewisSite.Controllers
 {
     public class StoriesController : Controller
     {
-        ApplicationDbContext context;
-        public StoriesController(ApplicationDbContext c)
+        IStoryRepository repo;
+        public StoriesController(IStoryRepository r)
         {
-            context = c;
+            repo = r;
         }
 
-        public IActionResult Index(int storyId)
+        public IActionResult Index()
         {
-            var story = context.Stories
-                .Include(story => story.User)
-                .Where(story => story.StoryID == storyId)
-                .SingleOrDefault();
-            return View(story);
+            List<Story> stories = repo.Stories.ToList<Story>();
+            return View(stories);
+        }
+
+        [HttpPost]
+        public IActionResult Index(string storyTitle, string userName)
+        {
+            List<Story> stories = null;
+
+            if (storyTitle != null)
+            {
+                stories = (from r in repo.Stories where r.StoryTitle == storyTitle select r).ToList();
+            }
+            else if (userName != null)
+            {
+                stories = (from r in repo.Stories where r.User.UserName == userName select r).ToList();
+            }
+
+            return View(stories);
         }
 
         public IActionResult Story()
@@ -31,10 +47,9 @@ namespace IsaacLewisSite.Controllers
         [HttpPost]
         public IActionResult Story(Story model)
         {
-            model.SubmitDate = DateTime.Now;
-            context.Stories.Add(model);
-            context.SaveChanges();
-            return RedirectToAction("Index", new { storyId = model.StoryID });
+            model.SubmitDate = DateTime.Now.Date;
+            repo.AddStory(model);
+            return View(model);
         }
 
     }
