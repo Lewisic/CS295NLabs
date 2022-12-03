@@ -15,27 +15,24 @@ namespace IsaacLewisSite.Controllers
         {
             repo = r;
         }
-
-        public IActionResult Index()
+        
+        public IActionResult Index(string userName, string submitDate)
         {
-            List<Story> stories = repo.Stories.ToList<Story>();
-            return View(stories);
-        }
+            List<Story> stories;
 
-        [HttpPost]
-        public IActionResult Index(string storyTitle, string userName)
-        {
-            List<Story> stories = null;
-
-            if (storyTitle != null)
+            if (submitDate != null)
             {
-                stories = (from r in repo.Stories where r.StoryTitle == storyTitle select r).ToList();
+                
+                stories = (from r in repo.Stories where r.SubmitDate.Date == DateTime.Parse(submitDate).Date select r).ToList<Story>();
             }
             else if (userName != null)
             {
-                stories = (from r in repo.Stories where r.User.UserName == userName select r).ToList();
+                stories = (from r in repo.Stories where r.User.UserName == userName select r).ToList<Story>();
             }
-
+            else
+            {
+                stories = repo.Stories.ToList<Story>();
+            }
             return View(stories);
         }
 

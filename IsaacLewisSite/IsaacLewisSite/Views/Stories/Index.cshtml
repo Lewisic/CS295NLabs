@@ -6,50 +6,51 @@
 
 
 
-    <h1 class="jumbotron">Stories of Star Wars</h1>
-   
+<h1 class="jumbotron">Stories of Star Wars</h1>
+
     Enter a Story title:
-    <form method="post" class="container">
-        <div class="row p-2">
-            <label for="StoryTitle" class="control-label col-md-1">Title</label>
-            <input name="StoryTitle" class="form-control col-md-6" />
-        </div>
-        <div class="row p-2">
-            <button type="submit" class="form-control btn btn-success col-2">Submit</button>
-            <a asp-action="Index" class="btn btn-secondary col-3">Reset</a>
-        </div>
-    </form>
+<form method="get" class="container">
+    <div class="row p-2">
+        <label for="UserName" class="control-label col-md-1">User Name</label>
+        <input name="UserName" class="form-control col-md-6" />
+    </div>
+    <div class="row p-2">
+        <button type="submit" class="form-control btn btn-success col-2">Submit</button>
+        <a asp-action="Index" class="btn btn-secondary col-3">Reset</a>
+    </div>
+</form>
 
-    <form method="post" class="container">
-        <div class="row p-2">
-            <label for="UserName" class="control-label col-md-1">User Name</label>
-            <input name="UserName" class="form-control col-md-6" />
-        </div>
-        <div class="row p-2">
-            <button type="submit" class="form-control btn btn-success col-2">Submit</button>
-        </div>
-    </form>
+<form method="get" class="container">
+    <div class="row p-2">
+        <label for="SubmitDate" class="control-label col-md-1">Date Submitted</label>
+        <input name="SubmitDate" type="date" class="form-control col-md-6" />
+    </div>
+    <div class="row p-2">
+        <button type="submit" class="form-control btn btn-success col-2">Submit</button>
+    </div>
+</form>
 
-    <h1 class="display-4">Stories</h1>
+<h1 class="display-4">Stories</h1>
 
-    @foreach (Story story in Model)
-    {
-        <p>
-            <strong class="m-3">Title:</strong>
-            @story.StoryTitle<br />
-            <strong class="m-3">Topic:</strong>
-            @story.StoryTopic<br />
-            <strong class="m-3">Stories Date:</strong>
-            @story.StoryDate<br />
-            <strong class="m-3">Story Text:</strong>
-            @story.StoryText<br />
-            <strong class="m-3">Created By:</strong>
-            @story.User.UserName<br />
-            <strong class="m-3">Creation Date:</strong>
-            @story.SubmitDate<br />
-        </p>
-    }
+@foreach (Story story in Model)
+{
+    <p>
+        <strong class="m-3">Title:</strong>
+        @story.StoryTitle<br />
+        <strong class="m-3">Topic:</strong>
+        @story.StoryTopic<br />
+        <strong class="m-3">Stories Date:</strong>
+        @story.StoryDate<br />
+        <strong class="m-3">Story Text:</strong>
+        @story.StoryText<br />
+        <strong class="m-3">Created By:</strong>
+        @story.User.UserName<br />
+        <strong class="m-3">Creation Date:</strong>
+        @story.SubmitDate.Date<br />
+    </p>
+}
 
-    <a href="/Stories/Story">Add a Story</a><br />
-    <a href="/Home">Home</a>
+<a href="/Stories/Story">Add a Story</a>
+<br />
+<a href="/Home">Home</a>
 
